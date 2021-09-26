@@ -1,0 +1,101 @@
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%>
+<title>Product</title>
+
+<body onload="getLocation()">
+  <div class="container-fluid ">
+
+    <div class="row ">
+      <%if(user){%>
+      <div class="col  col-sm-12 col-md-3 col-lg-2 mt-2 "  ><a  href="/dashboard"> <div class="productdash"><i class="fas fa-lg fa-home" style="margin-right: 12px;"></i>Go To Dashboard</div></a></div>
+      <div class="col  col-sm-12 col-md-3 col-lg-4  "  ></div>
+      <div class="col  col-sm-12 col-md-3 col-lg-4  "  ></div>
+      <div class="col  col-sm-12 col-md-3 col-lg-2  mt-2" ><a  href="/dashboard"><div class="profiledash "><i class="fas fa-lg fa-user-circle" style="margin-right: 12px;"></i><%=user.name%></div></a></div>
+      <%}else{%>
+      <div class="col  col-sm-12 col-md-3 col-lg-2  mt-2" ><a  href="/dashboard"><div class="profiledash "><i class="fas fa-lg fa-user-circle" style="margin-right: 12px;"></i>Not Signed in</div></a></div>
+      <%}%>
+    </div>
+
+  </div>
+  <div class="topcontainer">
+    <div class="topproductsarea">
+      <!-- <div> <label for="cars">product type:</label>
+        <select name="cars" id="cars">
+          <option value="onrent">On Rent</option>
+          <option value="brandnew">Brand new</option>
+
+        </select></div> -->
+      <!-- <div> <label for="cars">sort by:</label>
+        <select name="cars" id="cars">
+          <option value="LTH"> Price Low To High</option>
+          <option value="LTH">Recently Added</option>
+          <option value="HTL"> Price High to Low</option>
+
+        </select></div> -->
+    </div>
+    <div class="container-fluid productsarea"    >
+      <%  products.forEach(function(product){ %>
+      <% if (product.verified==true) { %>
+
+      <a href="#" class="producttt">
+        <div class="card m-2 p-1" style="width: 20rem;"  data-aos="fade-up"
+        data-aos-offset="-350"
+        data-aos-delay="0"
+        data-aos-duration="300"
+        data-aos-easing="ease-in-out"
+        data-aos-mirror="false"
+        data-aos-once="true"
+        data-aos-anchor-placement="top-center">
+          <div class="cardinner">
+
+            <img class=" card-img-top" src="uploads/<%=product.image%>" alt="" style="height:200px">
+
+            <div class="topp"><h5 style="margin-top: 5px;"><%=product.name%></h5>
+              <div class="mydropdown">
+                <span class="options3"><i class="fas fa-ellipsis-v"></i></span>
+                <div class="mydropdown-content">
+                <p><a href="#"> View Seller</a></p>
+                <p><a href="#"> report spam</a></p>
+                </div>
+              </div>
+            </div>
+            <div style="width: 95%; height: 4px;background-color: #81BC40;border-radius: 25px; margin: auto;"></div>
+
+            <div class="price">
+              <p style="margin-top: 5px;" ><span style="color: #81BC40;font-size: 22px;"> <%=product.price%> Rs.</span></p>
+              <p ><i class="fas fa-map-marker-alt" style="margin-right:5px;"></i><%=product.location%></p>
+
+            </div>
+            <p class="pdescription"> Description: <%=product.description.substring(0, 15) + " ..."%></p>
+            <div class="price">
+
+              <%if(product.category!="Crops"){%>
+              <p>Available for : <%=product.status%></p>
+              <%}else{%>
+              <p>Price per : <%=product.per%></p>
+              <%}%>
+            </div>
+
+
+            <!-- <div style="display: flex; justify-content: flex-start;margin-right: 5px;">
+              <img src="images/pp.jpeg" style=" width: 15px;height: 15px; position: relative;margin-right: 5px;"alt="">
+
+            </div> -->
+            <form action="/productdetails" class="buy" method="post">
+              <button type="submit" class="buy" name="ttr" value="<%=product._id%>"> View Details </button>
+            </form>
+        </div>
+
+    </div>
+    </a>
+    <% } %>
+    <% }) %>
+
+
+    </div>
+    </div>
+</body>
+  <%- include("partials/footer"); -%>

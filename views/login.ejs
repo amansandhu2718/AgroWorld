@@ -1,0 +1,75 @@
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%><title>Login</title>
+<div class = "rloginbcg">
+  <div class="container" style="padding-bottom: 125px;" >
+  	<img class="mb-4" src="images/logo.png" alt="LOGO" width="300">
+  	<h1>Login</h1>
+
+    <%if(success_msg!="") {%>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%=success_msg%>
+        <button type="button" class="btn btn-success close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <%}%>
+
+    <%if(error_msg!="") {%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%=error_msg%>
+        <button type="button" class="btn btn-warning close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <%}%>
+
+    <%if(error!="") {%>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <%=error%>
+        <button type="button" class="btn btn-danger close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <%}%>
+
+
+  	<div class="row">
+    	<div class="col-sm-8">
+      	<div class="card">
+        	<div class="card-body">
+
+          	<!-- Makes POST request to /login route -->
+          	<form action="/login" method="POST">
+      	      <div class="form-group">
+        	      <label for="email">Email</label>
+          	    <input type="email" class="form-control" placeholder="Your registered email" name="email"><br>
+            	</div>
+  	          <div class="form-group">
+    	          <label for="password">Password</label>
+      	        <input type="password" class="form-control" name="password" placeholder="Password"><br>
+        	    </div>
+          	  <button type="submit" class="btn btn-dark">Login</button>
+  	        </form>
+
+    	    </div>
+      	</div>
+    	</div>
+
+  	  <div class="col-sm-4">
+    	  <div class="card">
+      	  <div class="card-body">
+        	  <a class="btn btn-block" href="/signup" role="button" style="color:black;">
+          	  <!-- <i class="fab fa-google"></i> -->
+        	    Not registered? Sign Up now
+        	  </a>
+        	</div>
+      	</div>
+  	  </div>
+
+	  </div>
+  </div>
+	<%- include("partials/footer"); -%>
+</div>

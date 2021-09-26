@@ -1,0 +1,48 @@
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%>
+<title><%=products.name%></title>
+<!--SEctions-->
+<div class=" productdetail1" style="background-color: #Fdfdfd;"><div class="mynavvv"></div>
+<div class="row p-5 productdetailsrow" style="width: 100%; ">
+  <div class="col col-12 col-sm-12 col-md-0 col-lg-2"></div>
+  <div class="col col-12 col-sm-12 col-md-6 col-lg-4"><img class=" card-img-top" src="uploads/<%=products.image%>" alt=""></div>
+  <div class="col col-12 col-sm-12 col-md-6 col-lg-4 mt-2" >
+<h2 class="mb-2"><%=products.name%></h2>
+
+<div style="width: 50%; height: 4px;background-color: #81BC40;"></div>
+
+<h4 class="mt-2">Price: <%=products.price%> /- Rs </h4>
+<% //<p>★★★★☆    5 reviews</p> %>
+<hr>
+<p>Description: <%=products.description%></p>
+<hr>
+
+<div class="sellerdetails">
+  <%if(products.category!="Crops"){%>
+  <p> Available for : <%=products.status%></p>
+  <%}else{%>
+  <p>Price per : <%=products.per%></p>
+  <%}%>
+<div class="sellerdetailsinner">
+<p>Product by : <%=products.uploaded%></p>
+<p>Location : <%=products.location%></p>
+</div>
+</div>
+<div class="buttonss">
+  <a class="btn btn-warning" href="/AddTowishlist" style="width: 200px;margin: auto;">Add to Wishlist</a>
+<a class="btn btn-warning" href="tel:+917355719804" style="width: 200px;margin: auto;">Contact Now</a>
+</div>
+</div>
+<div class="col col-12 col-sm-12 col-md-0 col-lg-2"></div>
+</div><div class="detailsfooter">
+  <%- include("partials/footer"); -%>
+
+</div>
+</div>
+ <!--Sections end-->
+
+
+  <!--footer-->

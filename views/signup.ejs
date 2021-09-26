@@ -1,0 +1,97 @@
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%>
+<title>Sign up</title>
+  <div class = "rloginbcg">
+  <div class ="container">
+    <img class="mb-4" src="images/logo.png" alt="LOGO" width="300">
+    <h1>Sign Up</h1>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+
+            <form class="form-signup" action="/signup" method="POST">
+              <div class="form-group">
+                <label for="username">Name</label>
+                <input type="text" id="username" class="form-control" required="true" placeholder="Your full name" name="username" onchange="return vali1();" value="<%=user.username%>">
+                <%if(error.username){%>
+                <p style="color:red"><%=error.username.msg%></p>
+                <%}%>
+              </div><br>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" required="true" placeholder="Your email" name="email" value="<%=user.email%>">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <%if(error.email){%>
+                <p style="color:red"><%=error.email.msg%></p>
+                <%}%>
+              </div><br>
+              <div class="form-group">
+                <label for="number">Contact Number</label><br>
+                <input type="number" id="phone" class="form-control" required="true" placeholder="Your contact number" name="number" value="<%=user.number%>">
+                <%if(error.number){%>
+                <p style="color:red"><%=error.number.msg%></p>
+                <%}%>
+              </div><br>
+              <div class="form-group">
+                <label for="location">Your location</label>
+                <input type="text" class="form-control" required="true" placeholder="Your location of trade" name="location" value="<%=user.location%>">
+              </div><br>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="pass" class="form-control" name="password" required="true" placeholder="Password" value="<%=user.password%>">
+                <small id="emailHelp" class="form-text text-muted">Password must be of minimum 8 characters.</small>
+                <%if(error.password){%>
+                <p style="color:red"><%=error.password.msg%></p>
+                <%}%>
+              </div><br>
+              <div class="form-group">
+                <label for="confirm">Confirm Password</label>
+                <input type="password" id="cpass" class="form-control" required="true" placeholder="Confirm password" name="confirm">
+                <%if(error.confirm){%>
+                <p style="color:red"><%=error.confirm.msg%></p>
+                <%}%>
+              </div><br>
+              <button type="submit" class="btn btn-dark">Sign Up</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+    	  <div class="card">
+      	  <div class="card-body">
+        	  <a class="btn btn-block" href="/login" role="button" style="color:black;">
+          	  <!-- <i class="fab fa-google"></i> -->
+        	    Already a member? Login now
+        	  </a>
+        	</div>
+      	</div>
+  	  </div>
+    </div>
+  </div>
+  <script>
+    function vali1() {
+        var name = document.getElementById("username");
+        var alpha = /^[a-zA-Z\s-, ]+$/;
+        if (name.value == "") {
+            alert('Please enter Name');
+            return false;
+        }
+        else if (!name.value.match(alpha)) {
+            alert('Invalid ');
+            return false;
+       }
+       else
+       {
+        return true;
+       }
+    }
+
+</script>
+
+  <%- include("partials/footer"); -%>
+</div>

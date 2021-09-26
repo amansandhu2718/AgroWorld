@@ -1,0 +1,24 @@
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%>
+<title>Feedback</title>
+
+
+
+	<div style="height:550px;">
+		<center>
+			<div class="container-fluid" style="padding-top:7%;">
+				<h1>FeedBack</h1>
+				<p>We believe in open door policy and encourage feedback at our website.<br>If you have any questions, complains, concerns or compliments we want to hear them day or night.</p>
+				<form method="post" action="mailto:agroworld2021@gmail.com" >
+					<input type="submit" class="btn btn-dark" value="Send Email" />
+				</form>
+			</div>
+		</center>
+	</div>
+	
+
+
+<%- include("partials/footer"); -%>

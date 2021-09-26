@@ -1,0 +1,65 @@
+<%- include("partials/header2"); -%>
+
+	<div class=""><center>
+		<div class="container-fluid productsarea radminbcg pt-3"    >
+			<%  product.forEach(function(product) { %>
+				<% if (product.verified==false) { %>
+			
+					<div class="card radmin m-2 p-1" style="width: 20rem;">
+						<img class="card-img-top" src="uploads/<%=product.image%>" alt="Card image cap" height="200px">
+						<div class="topp"><h5 style="margin-top: 5px;"><%=product.name%></h5></div>
+						<div style="width: 95%; height: 4px;background-color: #81BC40;border-radius: 25px; margin: auto;"></div>
+						<div class="price">
+						<p style="margin-top: 5px;" ><span style="color: #81BC40;font-size: 25px;"> <%=product.price%> Rs.</span></p>
+						<p ><i class="fas fa-map-marker-alt" style="margin-right:5px;"></i><%=product.location%></p>
+						</div>
+						<div class="price"><p>Description: <%=product.description.substring(0, 12) + " ..."%><p></div>
+						<div class="price">
+							<p>Available for : <%=product.status%></p>
+						</div>
+						<div>
+							<center>
+								<form class="" action="/admin" method="post">
+									<input type="text" name="id" value=<%=product._id%> style="display:none;" readonly>
+									<input type="submit" name="verified" value="Accept" class="btn btn-success">
+									<input type="submit" name="verified" value="Reject" class="btn btn-danger">
+								</form>
+							</center>
+						</div>
+					</div>
+				
+			<% } %>
+			<% }) %> 
+	  </div>
+</div>
+<%- include("partials/footer"); -%>
+
+<!-- 
+<%  product.forEach(function(product) { %>
+	<% if (product.verified==true) { %>
+
+		<div class="card radmin m-2 p-1" style="width: 20rem;">
+			<img class="card-img-top" src="uploads/<%=product.image%>" alt="Card image cap" height="200px">
+			<div class="topp"><h5 style="margin-top: 5px;"><%=product.name%></h5></div>
+			<div style="width: 95%; height: 4px;background-color: #81BC40;border-radius: 25px; margin: auto;"></div>
+			<div class="price">
+			<p style="margin-top: 5px;" ><span style="color: #81BC40;font-size: 25px;"> <%=product.price%> Rs.</span></p>
+			<p ><i class="fas fa-map-marker-alt" style="margin-right:5px;"></i><%=product.location%></p>
+			</div>
+			<div class="price"><p>Description: <%=product.description%><p></div>
+			<div class="price">
+				<p>Available for : <%=product.status%></p>
+			</div>
+			<div>
+				<center>
+					<form class="" action="/admin" method="post">
+						<input type="text" name="id" value=<%=product._id%> style="display:none;" readonly>
+						<input type="submit" name="verified" value="Accept" class="btn btn-success">
+						<input type="submit" name="verified" value="Reject" class="btn btn-danger">
+					</form>
+				</center>
+			</div>
+		</div>
+	
+<% } %>
+<% }) %> -->

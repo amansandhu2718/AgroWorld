@@ -1,0 +1,295 @@
+<div class="dashbackground">
+<%if(user){%>
+<%- include("partials/header2"); -%>
+<%}else{%>
+<%- include("partials/header"); -%>
+<%}%>
+<title><%=user.name%></title>
+
+<!--main-->
+
+<div class="dashcontainer -1">
+
+  <div class="dashprofile">
+
+
+
+
+
+
+      <div id="myaccordion" class="mt-3">
+
+          <div class=" " id="headingOne">
+            <h5 class="mb-0 ">
+              <button class="  dashprofilebtn " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="profilebtnrow">
+                  <div class="dashprofilepicdiv"><img class="dashprofilepic" src="images/pp.jpg" alt=""></div>
+<div class="dashprofileusername"><p style="font-size: 22px;"><%=user.name%> </p><div class="dashemail"><%=user.email%></div> </div>
+  <i  style=" color: white;margin-top: 10px;"class="fas  fa-chevron-down"></i>
+                </div>
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#myaccordion">
+            <div class="card-body">
+
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">ADDRESS: <%=user.location%></li>
+                  <li class="list-group-item">PHONE NUMBER: <%=user.contact%></li>
+                  <li class="list-group-item">  <a href="/logout" class="btn btn-secondary">Logout</a></li>
+                </ul>
+
+            </div>
+          </div>
+
+
+
+      </div>
+
+
+
+      <div class="buttoncontainer mt-3" >
+        <button style="background-color: #4db6ac;" onclick='showpanel(0,"#4db6ac")' ><i style="margin-right: 10px;"class="fas fa-sort-amount-down"></i>For Sale</button>
+        <button style="background-color: #66bb6a;" onclick="showpanel(1,'#66bb6a')"><i style="margin-right: 10px;" class="fas fa-exchange-alt"></i>For Rent</button>
+        <button style="background-color: #aed581;" onclick="showpanel(2,'#aed581')"><i style="margin-right: 10px;" class="fas fa-lg fa-american-sign-language-interpreting"></i>Crops</button>
+        <button style="background-color: #80cbc4;" onclick="showpanel(3,'#80cbc4')"><i style="margin-right: 10px;" class="fas fa-lg fa-upload"></i>Upload</button>
+
+      </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="dashcontent">
+
+
+    <div class="tabcontainer">
+
+
+
+
+    <div class="tabpanel">
+      <div class="uploadButton" style="padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                  <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                 <h4 class="display-4" style="color: white;">Equipment For Sale</h4>
+               <p class="lead" style="color: white;">Complete list of your products for sale. </p>
+                </div>
+
+             <hr style="color: white;">
+                </div>
+        </div>
+        <table>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Location</th>
+          <th>View Product</th>
+        </tr>
+
+        <%  products.forEach(function(product) { %>
+        <% if (product.uploaded==user.name) { %>
+        <% if (product.status=="Sale") { %>
+        <% if (product.category!="Crops") { %>
+        <tr>
+          <td><%=product.name%></td>
+          <td><%=product.price%> </td>
+          <td><%=product.location%></td>
+          <td>
+              <form action="/productdetails" method="post">
+                  <button type="submit" class="btn btn-info btn-lg"  name="ttr" value="<%=product._id%>"> View Details </button>
+              </form>
+          </td>
+        </tr>
+
+      <% } } } %>
+      <% }) %>
+      </table>
+      <br>
+    </div>
+    <div class="tabpanel">
+      <div class="uploadButton" style="padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+       <h4 class="display-4" style="color: white;">For Rent</h4>
+     <p class="lead" style="color: white;">Complete list of your products for rent.  </p>
+      </div>
+   <hr style="color: white;">
+      </div>
+</div>
+      <table>
+      <tr>
+        <th>Name</th>
+        <th>price</th>
+        <th>location</th>
+        <th>View Product</th>
+      </tr>
+      <%  products.forEach(function(product) { %>
+        <% if (product.uploaded==user.name) { %>
+          <% if (product.status=="Rent" & product.category!="Crops") { %>
+        <tr>
+          <td><%=product.name%></td>
+          <td><%=product.price%></td>
+          <td><%=product.location%></td>
+          <td><form action="/productdetails" method="post">
+              <button type="submit" class="btn btn-info btn-lg"  name="ttr" value="<%=product._id%>"> View Details </button>
+              </form></td>
+        </tr>
+      <% } } %>
+      <% }) %>
+
+    </table>
+
+
+    </div>
+    <div class="tabpanel">
+      <div class="uploadButton" style="padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+       <h4 class="display-4" style="color: white;">Crops</h4>
+     <p class="lead" style="color: white;">Complete list of your crops for sale. </p>
+      </div>
+   <hr style="color: white;">
+      </div>
+</div>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>price</th>
+            <th>per</th>
+            <th>location</th>
+            <th>View Product</th>
+          </tr>
+      <%  products.forEach(function(product) { %>
+        <% if (product.uploaded==user.name) { %>
+          <% if (product.category=="Crops") { %>
+        <tr>
+          <td><%=product.name%></td>
+          <td><%=product.price%></td>
+          <td><%=product.per%></td>
+          <td><%=product.location%></td>
+          <td><form action="/productdetails" method="post">
+              <button type="submit" class="btn btn-info btn-lg"  name="ttr" value="<%=product._id%>"> View Details </button>
+              </form></td>
+        </tr>
+      <% } } %>
+      <% }) %>
+    </table>
+    </div>
+    <div class="tabpanel">
+
+      <div class="uploadButton" style="padding: 15px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h4 class="display-4" style="color: white;">Upload</h4>
+            <p class="lead" style="color: white;">Upload information of your product which you want to give on rent. </p>
+          </div>
+        <hr style="color: white;">
+        </div>
+                  <form class="form-control uploadform" action="/dashboard" method="post" style="padding: 15px;" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="category" style="float:left;">Category</label>
+                      <select class="form-control" id="category" name="category" onchange="cells()">
+                        <option value="">-- Select An Option --</option>
+                        <option value="Vehicle">Vehicle</option>
+                        <option value="Crops">Crops</option>
+                        <option value="Equipment">Equipment</option>
+                      </select>
+                      <label for="name" style="float:left;">Name</label>
+                      <input class="form-control" type="text" name="name" placeholder="Product name" required>
+                      <label style="float:left;">Upload image of your product</label>
+                      <input type="file" class="form-control" name="file" required placeholder="upload your product image">
+                      <label style="float:left;">Location</label>
+                      <input type="text" class="form-control" name="location" placeholder="Where is this product available" required>
+                      <label style="float:left;">Detailed Description</label>
+                      <input type="text" class="form-control" name="description" placeholder="Explain completely about your product" required>
+                      <label style="float:left;">Price</label>
+                      <input type="number" class="form-control" name="price" placeholder="At what price you want to put your product" required>
+                      <div id="availability">
+                        <label style="float:left;">Available for</label>
+                        <select class="form-control" name="status">
+                          <option>Rent</option>
+                          <option>Sale</option>
+                        </select>
+                      </div>
+                      <div id="per">
+                        <label style="float:left;">Price Per</label>
+                        <select class="form-control" name="per">
+                          <option>kg</option>
+                          <option>Ton</option>
+                          <option>Quintal</option>
+                        </select>
+                      </div>
+                      <label style="float:left;">Uploaded by :</label>
+                      <input type="text" class="form-control" name="uploaded" value="<%=user.name%>" required readonly>
+                    </div>
+                    <button style="margin-top: 15px;"class="btn btn-primary" type="submit" name="button">Upload item</button>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+<!--main end -->
+
+<script type="text/javascript">
+  document.getElementById("per").style.display = "none";
+  function cells()
+  {
+    var ct=document.getElementById("category").value;
+    if(ct=="")
+    {
+      alert("Please Select an option");
+    }
+    else if(ct=="Crops")
+    {
+      document.getElementById("availability").style.display = "none";
+      document.getElementById("per").style.display = "block";
+    }
+    else {
+      document.getElementById("availability").style.display = "block";
+      document.getElementById("per").style.display = "none";
+    }
+  }
+</script>
+
+
+
+  <!--Sections end-->
+
+<!--new dash-->
+
+<!--new dash end-->
+  <%- include("partials/footer"); -%>
+
+  </div>
